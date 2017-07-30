@@ -8,7 +8,7 @@ import {router} from './router'
 import {store} from './applicationStore'
 
 /* UI */
-import UIKit from 'uikit'
+import UIkit from '../node_modules/uikit/dist/js/uikit.js'
 import UIKitIcon from '../node_modules/uikit/dist/js/uikit-icons.min'
 
 Vue.use(VueResource);
@@ -22,11 +22,15 @@ if (Vue.localStorage.get('authToken') && !Vue.http.headers.common['X-NFK-AUTH'])
   Vue.http.interceptors.push((request, next)  => {
     request.headers.set('X-NFK-AUTH', Vue.localStorage.get('authToken')+'1');
     next((response) => {
-
       if(response.status == 401 ) {
-        // show error message
-        auth.logout();
-        router.go('/login?unauthorized=1');
+        // clear localStorage, show error popup
+        Vue.localStorage.remove('authToken');
+        UIkit.modal.dialog('<p class="uk-modal-body">Probably your token has expired</p>');
+        // router.go('/login?unauthorized=1');
+      }
+      if(response.status == 403 ) {
+        Vue.localStorage.remove('authToken');
+        UIkit.modal.dialog('<p class="uk-modal-body">You have not access</p>');
       }
     });
   });

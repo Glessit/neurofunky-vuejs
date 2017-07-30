@@ -23,7 +23,6 @@
             }
         },
         created: function() {
-        debugger;
             // after facebook return user to this endpoint we should to check code param.
             let code = this.$route.query.code;
             this.checkFacebookCode(code);
@@ -38,27 +37,12 @@
             else {
                 console.log('auth. failed');
             }
-
-            this.$http
-                .get('http://localhost:8081/api/trackasdasdasd')
-                .then(
-                    function (response) {
-                    debugger;
-                        this.tracks = response.data.content;
-                    },
-                    function (response) {
-                    debugger;
-                        console.log('An error occurred.');
-                    }
-                );
         },
         methods: {
             checkFacebookCode(code) {
                 this.$http.get('http://localhost:8081/api/facebook/login/handler?code=' + code)
                 .then(
                     function (response) {
-
-
                         this.$store.commit('auth', {
                             status: true,
                             token: response.data.token,
@@ -74,6 +58,9 @@
                         console.log('An error occurred.');
                     }
                 );
+            },
+            logout() {
+                // clear localStorage and send request for remove token
             }
         }
     }
