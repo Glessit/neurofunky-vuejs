@@ -8,7 +8,7 @@ import News from './News.vue';
 const Foo = {template: '<div>fssssoo {{ this.$route.query }}</div>', created: function () {
 
 }}
-const Bar = { template: '<div>bar</div>' }
+const Bar = { template: '<div>bar component!!!!!!1!</div>' }
 
 export const router = new VueRouter({
     mode: 'history',

@@ -19,14 +19,22 @@
                     <div class="contact">
                         <div style="margin-bottom: 10px; border-bottom: 10px solid #F9F9F9;color: white;">
                             <span style="color: grey;margin-left: 11px; font-size: 12px; display: inherit; font-family: 'Montserrat Alternates'">
-                                    Telegram <a href="https://t.me/NeurofunkClub" target="_blank">official group</a> & Official <a href="https://t.me/NeurofunkClubChannel" target="_blank"> channel</a>
+                                    Telegram official <a href="https://t.me/NeurofunkClubChannel" target="_blank"> channel</a>
                                 </span>
                         </div>
                         <div style="margin-bottom: 10px; border-bottom: 10px solid #F9F9F9;color: white;">
-                            <span style="margin-left: 11px; font-size: 12px; display: inherit; font-family: 'Montserrat Alternates'">
+                            <div v-if="this.$store.state.auth.status">
+                                <span style="margin-left: 11px; font-size: 12px; display: inherit; font-family: 'Montserrat Alternates'; color: gray;">
+                                    Hello {{this.$store.state.auth.firstName}} !
+                                </span>
+
+                            </div>
+                            <div v-else>
+                                <span style="margin-left: 11px; font-size: 12px; display: inherit; font-family: 'Montserrat Alternates'">
                                     <a :href="facebookLoginURL">Facebook login</a>
-                                <span>Hello {{this.$store.state.auth.firstName}} </span>
-                            </span>
+                                </span>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -65,7 +73,7 @@
         methods: {
             openFacebookLoginPage: function() {
                    console.log('testsssss');
-                UIkit.modal.dialog('<p class="uk-modal-body"><iframe target="top" src="http://www.facebook.com/v2.9/dialog/oauth?client_id=372149609853567&&display=popup&redirect_uri=http://localhost/api/facebook/login/handler"></iframe></p>');
+                UIkit.modal.dialog('<p class="uk-modal-body">111</p>');
             }
         },
         created: function () {
